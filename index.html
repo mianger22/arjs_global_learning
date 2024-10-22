@@ -5,15 +5,37 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <script>
-      // Функция для создания цилиндра с использованием Three.js
-      AFRAME.registerComponent('cylinder-model', {
+      // Функция для создания модели пончика с посыпкой
+      AFRAME.registerComponent('donut-model', {
         init: function () {
-          const geometry = new THREE.CylinderGeometry(0.5, 0.5, 1, 32); // Создаем основной цилиндр
-          const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // Зеленый цвет для основного цилиндра
-          const cylinder = new THREE.Mesh(geometry, material);
-          this.el.setObject3D('mesh', cylinder); // Добавление основного цилиндра в элемент
+          const geometry = new THREE.TorusGeometry(0.5, 0.2, 16, 100); // Создаем пончик
+          const material = new THREE.MeshBasicMaterial({ color: 0xffcc00 }); // Желтый цвет для пончика
+          const donut = new THREE.Mesh(geometry, material);
+          this.el.setObject3D('mesh', donut); // Добавление пончика в элемент
           
-          // Создание ребер цилиндра
+          // Создание посыпки
+          const sprinkleColors = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0xff00ff]; // Цвета для посыпки
+          const sprinkleCount = 20; // Количество точек посыпки
+
+          for (let i = 0; i < sprinkleCount; i++) {
+            const sprinkleGeometry = new THREE.SphereGeometry(0.05, 8, 8); // Создаем маленькие сферы для посыпки
+            const sprinkleMaterial = new THREE.MeshBasicMaterial({ color: sprinkleColors[Math.floor(Math.random() * sprinkleColors.length)] });
+            const sprinkle = new THREE.Mesh(sprinkleGeometry, sprinkleMaterial);
+
+            // Случайные координаты на поверхности пончика
+            const angle = Math.random() * Math.PI * 2;
+            const height = Math.random() * 0.2 - 0.1;  // Определяем высоту
+    
+            sprinkle.position.set(
+              0.5 * Math.cos(angle),
+              0.2 + height, // Значение по Y немного выше тупо пончика
+              0.5 * Math.sin(angle)
+            );
+
+            donut.add(sprinkle); // Добавить посыпку к пончику
+          }
+
+          // Создание ребер пончика
           const edges = new THREE.EdgesGeometry(geometry); // Получаем геометрию ребер
           const edgeMaterial = new THREE.LineBasicMaterial({ color: 0x000000 }); // Черный цвет для линий
           const line = new THREE.LineSegments(edges, edgeMaterial); // Создаем линии по ребрам
@@ -21,15 +43,14 @@
         }
       });
     </script>
-    <title>AR.js with Cylinder Model and Edges</title>
+    <title>AR.js with Donut Model and Sprinkles</title>
   </head>
   <body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs>
       <a-marker preset="hiro">
-        <a-entity cylinder-model></a-entity> <!-- Используем кастомный компонент -->
+        <a-entity donut-model></a-entity> <!-- Используем кастомный компонент -->
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
   </body>
 </html>
-
