@@ -1,21 +1,18 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <title>AR.js with 3D Model</title>
+  </head>
+  <body style="margin: 0; overflow: hidden;">
+    <a-scene embedded arjs>
+      <a-marker preset="hiro">
+        <!-- Используем 3D модель от Google -->
+        <a-entity gltf-model="https://cdn.rawgit.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/Box.gltf" scale="0.5 0.5 0.5"></a-entity>
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
 
-<!DOCTYPE html>
-        <html lang="ru">
-               <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-                    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                    <title>My first AR app</title>
-               </head>
-               <body>
-                    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-                <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-            <a-scene embedded arjs>
-                    <a-marker preset="hiro">
-            <!-- Используем 3D модель туалетной бумаги -->
-        <a-entity gltf-model="https://cdn.jsdelivr.net/gh/aframevr/aframe/examples/3.1.0/model/toilet_paper.glb" scale="0.5 0.5 0.5"></a-entity>
-                    </a-marker>
-                    <a-entity camera></a-entity>
-                </a-scene>
-       </body>
-        </html>
+
