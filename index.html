@@ -1,18 +1,35 @@
+
+<!DOCTYPE html>
 <html>
   <head>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <title>AR.js with 3D Model</title>
+    <script>
+      // Функция для создания цилиндра с использованием Three.js
+      AFRAME.registerComponent('cylinder-model', {
+        init: function () {
+          const geometry = new THREE.CylinderGeometry(0.5, 0.5, 1, 32); // Создаем основной цилиндр
+          const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // Зеленый цвет для основного цилиндра
+          const cylinder = new THREE.Mesh(geometry, material);
+          this.el.setObject3D('mesh', cylinder); // Добавление основного цилиндра в элемент
+          
+          // Создание ребер цилиндра
+          const edges = new THREE.EdgesGeometry(geometry); // Получаем геометрию ребер
+          const edgeMaterial = new THREE.LineBasicMaterial({ color: 0x000000 }); // Черный цвет для линий
+          const line = new THREE.LineSegments(edges, edgeMaterial); // Создаем линии по ребрам
+          this.el.setObject3D('edges', line); // Добавление ребер в элемент
+        }
+      });
+    </script>
+    <title>AR.js with Cylinder Model and Edges</title>
   </head>
   <body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs>
       <a-marker preset="hiro">
-        <!-- Используем 3D модель от Google -->
-        <a-entity gltf-model="https://cdn.rawgit.com/KhronosGroup/glTF-Sample-Models/master/2.0/DamagedHelmet/glTF/DamagedHelmet.gltf" scale="0.5 0.5 0.5"></a-entity>
+        <a-entity cylinder-model></a-entity> <!-- Используем кастомный компонент -->
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
   </body>
 </html>
-
 
