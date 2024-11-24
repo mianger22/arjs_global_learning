@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "@ar-js-org/ar.js": "^3.4.5",
     "aframe": "^1.6.0"
