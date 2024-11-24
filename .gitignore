@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/ar_core_2
 
 # testing
 /coverage
