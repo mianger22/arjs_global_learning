@@ -2,5 +2,6 @@
   "dependencies": {
     "@ar-js-org/ar.js": "^3.4.5",
     "aframe": "^1.6.0"
-  }
+  },
+  "homepage": "https://mianger22.github.io/arjs_global_learning/"
 }
