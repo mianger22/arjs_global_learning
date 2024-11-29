@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <title>My first AR app v 9.0</title>
+    <title>My first AR app v 10.0</title>
         
-    <script src="ar_libraries/aframe-master/aframe-master/dist/aframe-v1.6.0.min.js"></script>
+    <!-- <script src="ar_libraries/aframe-master/aframe-master/dist/aframe-v1.6.0.min.js"></script> -->
     <script src="ar_libraries/AR.js-3.4.0/aframe/build/aframe-ar.js"></script>
     <script src="ar_libraries/AR.js-3.4.0/three.js/build/ar.js"></script>
 
@@ -18,11 +18,12 @@
 <body>
     <a-scene embedded arjs>
         <a-marker preset="hiro">
-          <a-entity
+          <!-- <a-entity
             position="0 0 0"
             scale="0.05 0.05 0.05"
             gltf-model="https://cdn.rawgit.com/KhronosGroup/glTF-Sample-Models/master/2.0/DamagedHelmet/glTF/DamagedHelmet.gltf"
-          ></a-entity>        
+          ></a-entity>         -->
+          <a-entity position="1 0 0" scale="3 3 3" text="value: HELLO;color:black"></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
