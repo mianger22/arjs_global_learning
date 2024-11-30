@@ -20,7 +20,7 @@
     <a-scene embedded arjs>
         <a-marker preset="hiro">
             <a-entity id="rotating-model" gltf-model="https://cdn.rawgit.com/KhronosGroup/glTF-Sample-Models/master/2.0/ToyCar/glTF/ToyCar.gltf
- " scale="0.5 0.5 0.5"></a-entity>
+ " scale="1.5 1.5 1.5"></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
@@ -30,7 +30,7 @@
     let angle = 0;
  
     function animate() {
-        angle += 0.05; // Скорость вращения
+        angle += 0.03; // Скорость вращения
         // Координаты орбиты
         model.object3D.position.x = Math.cos(angle) * 1; // Радиус орбиты
         model.object3D.position.z = Math.sin(angle) * 1; // Радиус орбиты
