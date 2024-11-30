@@ -11,7 +11,7 @@
     <script src="ar_libraries/AR.js-3.4.0/aframe/build/aframe-ar.js"></script>
     <!-- <script src="ar_libraries/AR.js-3.4.0/three.js/build/ar.js"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> -->
-    <!-- <script src="https://threejs.org/build/three.min.js"></script> -->
+    <script src="https://threejs.org/build/three.min.js"></script>
 
     <style>
         body { margin: 0; overflow: hidden; }
@@ -40,7 +40,7 @@
             model.object3D.position.x = Math.cos(angle) * 1; // Радиус орбиты
             model.object3D.position.z = Math.sin(angle) * 1; // Радиус орбиты
             
-            // requestAnimationFrame(animate);
+            requestAnimationFrame(animate);
         }
     
         animate();
