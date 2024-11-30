@@ -18,6 +18,29 @@
 <body>
     <a-scene embedded arjs>
         <a-marker preset="hiro">
+            <a-entity id="rotating-model" gltf-model="https://cdn.rawgit.com/KhronosGroup/glTF-Sample-Models/master/2.0/DamagedHelmet/glTF/DamagedHelmet.gltf
+ " scale="0.1 0.1 0.1"></a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+   
+   <script>
+   const model = document.getElementById('rotating-model');
+    let angle = 0;
+ 
+    function animate() {
+        angle += 0.01; // Скорость вращения
+        // Координаты орбиты
+        model.object3D.position.x = Math.cos(angle) * 1; // Радиус орбиты
+        model.object3D.position.z = Math.sin(angle) * 1; // Радиус орбиты
+        
+        requestAnimationFrame(animate);
+    }
+ 
+    animate();
+   </script>
+    <!-- <a-scene embedded arjs>
+        <a-marker preset="hiro">
           <a-entity
             position="0 0 0"
             scale="0.5 0.5 0.5"
@@ -25,6 +48,6 @@
           ></a-entity>        
         </a-marker>
         <a-entity camera></a-entity>
-    </a-scene>
+    </a-scene> -->
 </body>
 </html>
