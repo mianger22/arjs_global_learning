@@ -17,38 +17,46 @@
     </style>
 </head>
 <body>
-    <div id="container"></div>
-
     <script>
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('container').appendChild(renderer.domElement);
 
-        // Создаем объект (в данном случае, сферу)
-        const geometry = new THREE.SphereGeometry(0.1, 32, 32);
-        const material = new THREE.MeshBasicMaterial({ color: 0x0077ff });
-        const sphere = new THREE.Mesh(geometry, material);
-        scene.add(sphere);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-        camera.position.z = 2; // Устанавливаем позицию камеры
+// Загружаем модель утки
+const loader = new THREE.GLTFLoader();
+let duck; // Здесь будет храниться модель утки
 
-        let angle = 0; // Изначальный угол
-        const radius = 1; // Радиус движения
+loader.load('https://cdn.rawgit.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf', function (gltf) {
+    duck = gltf.scene;
+    duck.scale.set(0.1, 0.1, 0.1); // Устанавливаем масштаб модели
+    scene.add(duck);
+}, undefined, function (error) {
+    console.error(error);
+});
 
-        function animate() {
-        angle += 0.01; // Увеличиваем угол
+// Устанавливаем позицию камеры
+camera.position.z = 2;
 
-        const x = radius * Math.cos(angle);
-        const z = radius * Math.sin(angle);
+let time = 0;
 
-        sphere.position.set(x, 0, z); // Устанавливаем новую позицию сферы
+function animate() {
+    requestAnimationFrame(animate);  // Запрашиваем следующую анимацию
 
-        renderer.render(scene, camera); // Рендерим сцену
-        requestAnimationFrame(animate); // Запрашиваем следующую анимацию
-        }
-        animate(); // Запускаем анимацию
+    if (duck) {
+        time += 0.01; // Увеличиваем время для анимации
+
+        // Движение утки по синусоиде
+        duck.position.x = Math.sin(time) * 1; // Движение по оси X
+        duck.position.y = Math.cos(time) * 0.5; // Движение по оси Y
+    }
+
+    renderer.render(scene, camera); // Рендерим сцену
+}
+
+animate(); // Запускаем анимацию
     </script>
 </body>
 </html>
