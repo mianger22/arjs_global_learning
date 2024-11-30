@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <title>My first AR app - version 57</title>
+    <title>My first AR app - version 58</title>
         
     <script src="ar_libraries/aframe-master/aframe-master/dist/aframe-v1.6.0.min.js"></script>
     <script src="ar_libraries/AR.js-3.4.0/aframe/build/aframe-ar.js"></script>
-    <!-- <script src="ar_libraries/AR.js-3.4.0/three.js/build/ar.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> -->
-    <!-- <script src="https://threejs.org/build/three.min.js"></script> -->
 
     <style>
         body { margin: 0; overflow: hidden; }
@@ -23,7 +20,9 @@
             <a-entity 
                 id="rotating-model" 
                 gltf-model="https://cdn.rawgit.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf"
-                scale="0.4 0.4 0.4">
+                scale="0.4 0.4 0.4"
+                position="0 0 0"
+            >
             </a-entity>
         </a-marker>
         <a-entity camera></a-entity>
