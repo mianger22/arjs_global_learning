@@ -10,53 +10,35 @@
     <script src="ar_libraries/aframe-master/aframe-master/dist/aframe-v1.6.0.min.js"></script>
     <script src="ar_libraries/AR.js-3.4.0/aframe/build/aframe-ar.js"></script>
     <script src="ar_libraries/AR.js-3.4.0/three.js/build/ar.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> -->
+    <script src="https://threejs.org/build/three.min.js"></script>
 
     <style>
         body { margin: 0; overflow: hidden; }
     </style>
 </head>
 <body>
+    <a-scene embedded arjs>
+        <marker preset="hiro">
+        <a-entity id="cube" geometry="primitive: box" material="color: green"></a-entity>
+        </marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+
     <script>
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-
-// Загружаем модель утки
-const loader = new THREE.GLTFLoader();
-let duck; // Здесь будет храниться модель утки
-
-loader.load('https://cdn.rawgit.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf', function (gltf) {
-    duck = gltf.scene;
-    duck.scale.set(0.1, 0.1, 0.1); // Устанавливаем масштаб модели
-    scene.add(duck);
-}, undefined, function (error) {
-    console.error(error);
-});
-
-// Устанавливаем позицию камеры
-camera.position.z = 2;
-
-let time = 0;
-
-function animate() {
-    requestAnimationFrame(animate);  // Запрашиваем следующую анимацию
-
-    if (duck) {
-        time += 0.01; // Увеличиваем время для анимации
-
-        // Движение утки по синусоиде
-        duck.position.x = Math.sin(time) * 1; // Движение по оси X
-        duck.position.y = Math.cos(time) * 0.5; // Движение по оси Y
-    }
-
-    renderer.render(scene, camera); // Рендерим сцену
-}
-
-animate(); // Запускаем анимацию
-    </script>
+        const cube = document.getElementById("cube");
+            const mixer = new THREE.AnimationMixer(cube.object3D);
+            const clip = new THREE.AnimationClip("rotate", -1, [
+                new THREE.VectorKeyframeTrack(".rotation[y]", [0, 1, 2], [0, Math.PI*2, Math.PI*4])
+            ]);
+            const action = mixer.clipAction(clip);
+            action.play();
+        const animate = function () {
+            requestAnimationFrame(animate);
+            mixer.update(0.01); // Обновление анимации
+            ARJS.postProcess();
+        };
+        animate();
+    </script>   
 </body>
 </html>
