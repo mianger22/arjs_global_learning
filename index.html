@@ -5,32 +5,13 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <title>My first AR app - version 2.2</title>
+    <title>My first AR app - version 56</title>
         
     <script src="ar_libraries/aframe-master/aframe-master/dist/aframe-v1.6.0.min.js"></script>
     <script src="ar_libraries/AR.js-3.4.0/aframe/build/aframe-ar.js"></script>
-    <script src="ar_libraries/AR.js-3.4.0/three.js/build/ar.js"></script>
+    <!-- <script src="ar_libraries/AR.js-3.4.0/three.js/build/ar.js"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> -->
-    <script src="https://threejs.org/build/three.min.js"></script>
-
-    <style>
-        body { margin: 0; overflow: hidden; }
-    </style>
-</head>
-<body>
-    <!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <title>My first AR app correct version</title>
-        
-    <script src="ar_libraries/aframe-master/aframe-master/dist/aframe-v1.6.0.min.js"></script>
-    <script src="ar_libraries/AR.js-3.4.0/aframe/build/aframe-ar.js"></script>
-    <script src="ar_libraries/AR.js-3.4.0/three.js/build/ar.js"></script>
-    <script src="https://threejs.org/build/three.min.js"></script>
+    <!-- <script src="https://threejs.org/build/three.min.js"></script> -->
 
     <style>
         body { margin: 0; overflow: hidden; }
@@ -49,19 +30,20 @@
     </a-scene>
    
    <script>
-   const model = document.getElementById('rotating-model');
-    let angle = 0;
- 
-    function animate() {
-        angle += 0.02; // Скорость вращения
-        // Координаты орбиты
-        model.object3D.position.x = Math.cos(angle) * 1; // Радиус орбиты
-        model.object3D.position.z = Math.sin(angle) * 1; // Радиус орбиты
-        
-        requestAnimationFrame(animate);
-    }
- 
-    animate();
+        const model = document.getElementById('rotating-model');
+        let angle = 0;
+    
+        function animate() {
+            angle += 0.02; // Скорость вращения
+
+            // Координаты орбиты
+            model.object3D.position.x = Math.cos(angle) * 1; // Радиус орбиты
+            model.object3D.position.z = Math.sin(angle) * 1; // Радиус орбиты
+            
+            // requestAnimationFrame(animate);
+        }
+    
+        animate();
    </script>
    
     <!-- <a-scene embedded arjs>
