@@ -5,54 +5,50 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <title>My first AR app correct version</title>
+    <title>My first AR app - version 2.2</title>
         
     <script src="ar_libraries/aframe-master/aframe-master/dist/aframe-v1.6.0.min.js"></script>
     <script src="ar_libraries/AR.js-3.4.0/aframe/build/aframe-ar.js"></script>
     <script src="ar_libraries/AR.js-3.4.0/three.js/build/ar.js"></script>
-    <script src="https://threejs.org/build/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
         body { margin: 0; overflow: hidden; }
     </style>
 </head>
 <body>
-    <a-scene embedded arjs='sourceType: webcam;'>
-        <a-assets>
-            <a-asset-item id="duckModel" src="path/to/your/duck-model.gltf"></a-asset-item>
-        </a-assets>
- 
-        <a-entity gltf-model="#duckModel" id="duck" position="0 0 0" scale="0.1 0.1 0.1"></a-entity>
-    </a-scene>
+    <div id="container"></div>
 
     <script>
         const scene = new THREE.Scene();
-        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+        document.getElementById('container').appendChild(renderer.domElement);
 
-        const duck = new THREE.GLTFLoader();
+        // Создаем объект (в данном случае, сферу)
+        const geometry = new THREE.SphereGeometry(0.1, 32, 32);
+        const material = new THREE.MeshBasicMaterial({ color: 0x0077ff });
+        const sphere = new THREE.Mesh(geometry, material);
+        scene.add(sphere);
 
-        duck.load('https://cdn.rawgit.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf', function(gltf) {
-            scene.add(gltf.scene);
-        });
+        camera.position.z = 2; // Устанавливаем позицию камеры
 
-        let angle = 0;
+        let angle = 0; // Изначальный угол
+        const radius = 1; // Радиус движения
 
         function animate() {
-            angle += 0.02; // увеличиваем угол
-            const radius = 1; // радиус круга
-            Math
-            const x = radius * Math.cos(angle);
-            const z = radius * Math.sin(angle);
+        angle += 0.01; // Увеличиваем угол
 
-            duck.position.set(x, 0, z);
+        const x = radius * Math.cos(angle);
+        const z = radius * Math.sin(angle);
 
-            renderer.render(scene, camera);
-            requestAnimationFrame(animate);
+        sphere.position.set(x, 0, z); // Устанавливаем новую позицию сферы
+
+        renderer.render(scene, camera); // Рендерим сцену
+        requestAnimationFrame(animate); // Запрашиваем следующую анимацию
         }
-        // Запуск анимации после загрузки модели
-        animate();
+        animate(); // Запускаем анимацию
     </script>
 </body>
 </html>
