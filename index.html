@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <title>My first AR app - version 58</title>
+    <title>My first AR app - version 60</title>
         
     <script src="ar_libraries/aframe-master/aframe-master/dist/aframe-v1.6.0.min.js"></script>
     <script src="ar_libraries/AR.js-3.4.0/aframe/build/aframe-ar.js"></script>
@@ -15,19 +15,7 @@
     </style>
 </head>
 <body>
-    <a-scene embedded arjs>
-        <a-marker preset="hiro">
-            <a-entity 
-                id="rotating-model" 
-                gltf-model="https://cdn.rawgit.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf"
-                scale="0.4 0.4 0.4"
-            >
-            </a-entity>
-        </a-marker>
-        <a-entity camera></a-entity>
-    </a-scene>
-   
-   <script>
+    <script>
         const model = document.getElementById('rotating-model');
         let angle = 0;
     
@@ -43,6 +31,18 @@
     
         animate();
    </script>
+
+    <a-scene embedded arjs>
+        <a-marker preset="hiro">
+            <a-entity 
+                id="rotating-model" 
+                gltf-model="https://cdn.rawgit.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf"
+                scale="0.4 0.4 0.4"
+            >
+            </a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
    
     <!-- <a-scene embedded arjs>
         <marker preset="hiro">
