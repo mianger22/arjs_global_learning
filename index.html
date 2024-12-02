@@ -11,36 +11,51 @@
     <!-- Если же нет, то подключаете локально, а как - я описал в своей статье https://ustinnovcorpgames.ru/ne_rabotaet_ar/ -->
     <script src="ar_libraries/aframe-master/aframe-master/dist/aframe-v1.6.0.min.js"></script>
     <script src="ar_libraries/AR.js-3.4.0/aframe/build/aframe-ar.js"></script>
+    <script src="https://threejs.org/build/three.min.js"></script>
 </head>
 <body>
     <a-scene embedded arjs>
-        <a-marker preset="hiro">
-            <a-entity 
-                id="rotating-model" 
-                gltf-model="https://cdn.rawgit.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF/Duck.gltf"
-                scale="0.4 0.4 0.4"
-            >
-            </a-entity>
+        <a-marker id="hiro-marker" preset="hiro">
+            <a-entity id="marker" visible="false"></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
-    
-    <script>
-        const model = document.getElementById('rotating-model');
-        let angle = 0;
-    
-        function animate() {
-            // Скорость вращения
-            angle += 0.02; 
 
-            // Координаты орбиты
-            model.object3D.position.x = Math.cos(angle) * 1; // Радиус орбиты
-            model.object3D.position.z = Math.sin(angle) * 1; // Радиус орбиты
-            
-            requestAnimationFrame(animate);
+    <script>
+        let scene, camera, renderer, cube;
+        const marker = document.getElementById('hiro-marker');
+
+        marker.addEventListener('markerFound', function() {
+            init();
+            animate();
+        });
+
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(300, 300);
+            marker.appendChild(renderer.domElement);
+
+            const geometry = new THREE.BoxGeometry();
+            const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+            cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
+            camera.position.z = 5;
         }
-    
-        animate();
+
+        // добавление анимации
+
+        let time = 0;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            time += 0.05;
+            cube.position.y = Math.sin(time) * 0.5; // Анимация по оси Y
+            cube.rotation.x += 0.01; // Вращение по оси X
+            cube.rotation.y += 0.01; // Вращение по оси Y
+            renderer.render(scene, camera);
+        }
     </script>
 </body>
 </html>
