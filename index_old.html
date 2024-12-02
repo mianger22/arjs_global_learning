@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <title>Motion animation on AR.js</title>
-    
-    <!-- В данном коде подключаю библиотеки локально. Если у Вас дистанционно подключаются, то можете оставить ссылки на удаленные репозитории -->
-    <!-- Если же нет, то подключаете локально, а как - я описал в своей статье https://ustinnovcorpgames.ru/ne_rabotaet_ar/ -->
+    <title>My first AR app - version 60</title>
+        
     <script src="ar_libraries/aframe-master/aframe-master/dist/aframe-v1.6.0.min.js"></script>
     <script src="ar_libraries/AR.js-3.4.0/aframe/build/aframe-ar.js"></script>
+
+    <style>
+        body { margin: 0; overflow: hidden; }
+    </style>
 </head>
 <body>
     <a-scene embedded arjs>
@@ -24,14 +26,13 @@
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
-    
+
     <script>
         const model = document.getElementById('rotating-model');
         let angle = 0;
     
         function animate() {
-            // Скорость вращения
-            angle += 0.02; 
+            angle += 0.02; // Скорость вращения
 
             // Координаты орбиты
             model.object3D.position.x = Math.cos(angle) * 1; // Радиус орбиты
@@ -41,6 +42,29 @@
         }
     
         animate();
-    </script>
+   </script>
+   
+    <!-- <a-scene embedded arjs>
+        <marker preset="hiro">
+        <a-entity id="cube" geometry="primitive: box" material="color: green"></a-entity>
+        </marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+
+    <script>
+        const cube = document.getElementById("cube");
+            const mixer = new THREE.AnimationMixer(cube.object3D);
+            const clip = new THREE.AnimationClip("rotate", -1, [
+                new THREE.VectorKeyframeTrack(".rotation[y]", [0, 1, 2], [0, Math.PI*2, Math.PI*4])
+            ]);
+            const action = mixer.clipAction(clip);
+            action.play();
+        const animate = function () {
+            requestAnimationFrame(animate);
+            mixer.update(0.01); // Обновление анимации
+            ARJS.postProcess();
+        };
+        animate();
+    </script>    -->
 </body>
 </html>
