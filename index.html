@@ -13,51 +13,40 @@
     <script src="ar_libraries/AR.js-3.4.0/aframe/build/aframe-ar.js"></script>
     <script src="https://threejs.org/build/three.min.js"></script>
     <style>
-        .button-text {
-            font-size: 2em;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            background-color: #4CAF50;
-            border-radius: 10px;
+        #button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid black;
+            border-radius: 5px;
+            padding: 10px;
             cursor: pointer;
+            text-align: center;
+            font-size: 20px;
         }
     </style>
 </head>
 <body style="margin: 0; overflow: hidden;">
+    <div id="button" onclick="changeText()">click me</div>
+
     <a-scene embedded arjs>
-        <!-- Кнопка -->
-        <a-entity id="button"
-            position="0 0 -1"
-            geometry="primitive: plane; width: 1; height: 0.5"
-            material="color: #4CAF50"
-            raycaster="objects: camera;"
-            cursor-raycaster>
-            <!-- Текст на кнопке -->
-            <a-text id="buttonText"
-                value="click me"
-                position="0 0.1 0.1"
-                rotation="0 0 0"
-                align="center"
-                color="white"
-                width="1.5">
-            </a-text>
-        </a-entity>
+        <a-marker preset="hiro">
+            <a-box position='0 0.5 0' material='color: #4CC3D9;'></a-box>
+        </a-marker>
+        <a-entity camera></a-entity>
     </a-scene>
 
     <script>
-        // Получаем элементы
-        const button = document.querySelector('#button');
-        const buttonText = document.querySelector('#buttonText');
-
-        // Обработчик клика
-        button.addEventListener('click', function() {
-            if (buttonText.getAttribute('value') === 'click me') {
-                buttonText.setAttribute('value', 'hello');
+        function changeText() {
+            const button = document.getElementById('button');
+            if (button.innerHTML === "click me") {
+                button.innerHTML = "hello";
             } else {
-                buttonText.setAttribute('value', 'click me');
+                button.innerHTML = "click me";
             }
-        });
+        }
     </script>
 
     <!-- <script>
