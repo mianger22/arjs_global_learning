@@ -29,24 +29,28 @@
     </style>
 </head>
 <body style="margin: 0; overflow: hidden;">
-    <div id="button" onclick="changeText()">click me</div>
+    <div id="button">click me</div>
 
     <a-scene embedded arjs>
         <a-marker preset="hiro">
-            <a-box position='0 0.5 0' material='color: #4CC3D9;'></a-box>
+            <a-box id="interactive-box" position='0 0.5 0' material='color: #4CC3D9;'></a-box>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
 
     <script>
+        const button = document.getElementById('button');
+
         function changeText() {
-            const button = document.getElementById('button');
             if (button.innerHTML === "click me") {
                 button.innerHTML = "hello";
             } else {
                 button.innerHTML = "click me";
             }
         }
+
+        // Добавление обработчика событий для касания
+        document.getElementById('interactive-box').addEventListener('touchstart', changeText);
     </script>
 
     <!-- <script>
