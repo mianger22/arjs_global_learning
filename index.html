@@ -5,34 +5,28 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
-    <title>Motion animation on AR.js ver 5.2</title>
+    <title>AR Business Card</title>
     
     <!-- В данном коде подключаю библиотеки локально. Если у Вас дистанционно подключаются, то можете оставить ссылки на удаленные репозитории -->
     <!-- Если же нет, то подключаете локально, а как - я описал в своей статье https://ustinnovcorpgames.ru/ne_rabotaet_ar/ -->
     <script src="ar_libraries/aframe-master/aframe-master/dist/aframe-v1.6.0.min.js"></script>
     <script src="ar_libraries/AR.js-3.4.0/aframe/build/aframe-ar.js"></script>
     <script src="https://threejs.org/build/three.min.js"></script>
+    <style>
+        body { margin: 0; }
+        #helloText { display: none; }
+    </style>
 </head>
-<body>
+<body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs>
-        <a-marker preset='custom' type='pattern' url='check_work_marker/pattern-test3.patt'>
-        <!-- верно <a-marker id="hiro-marker" preset='custom' type='pattern' url='./check_work_marker/pattern-test2.patt'> -->
-        <!-- <a-marker id="hiro-marker" preset='custom' type='pattern' url='./custom.patt'> -->
-            <!-- <a-entity id="marker" visible="false"></a-entity> -->
-            <!-- <a-entity
-                gltf-model="models/Car/Car.gltf"
-                scale="0.4 0.4 0.4"
-            >
-
-            </a-entity> -->
-            <a-entity
-                gltf-model="https://cdn.rawgit.com/KhronosGroup/glTF-Sample-Models/master/2.0/Avocado/glTF/Avocado.gltf"
-                scale="5 5 5"
-            
-                rotation="0 0 0" 
-                animation="property: rotation; to: 0 360 0; loop: true; dur: 6000;"
-            
-                ></a-entity>
+        <a-marker preset="hiro">
+            <a-box position="0 0.5 0" depth="0.1" height="0.5" width="1" color="#4CC3D9" id="button" 
+                   event-set__enter="_event: mouseenter; color: #EF2D5E"
+                   event-set__leave="_event: mouseleave; color: #4CC3D9"
+                   event-set__click="_event: click; _target: #helloText; display: block; _target: #button; display: none;">
+            </a-box>
+            <a-text value="Click Me!" position="0 0.5 0.1" color="#FFFFFF"></a-text>
+            <a-text id="helloText" value="hello" position="0 0.5 0.1" color="#FFFFFF"></a-text>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
