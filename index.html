@@ -13,24 +13,53 @@
     <script src="ar_libraries/AR.js-3.4.0/aframe/build/aframe-ar.js"></script>
     <script src="https://threejs.org/build/three.min.js"></script>
     <style>
-        body { margin: 0; }
-        #helloText { display: none; }
+        .button-text {
+            font-size: 2em;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            background-color: #4CAF50;
+            border-radius: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs>
-        <a-marker preset="hiro">
-            <a-box position="0 0.5 0" depth="0.1" height="0.5" width="1" color="#4CC3D9" id="button" 
-                   event-set__enter="_event: mouseenter; color: #EF2D5E"
-                   event-set__leave="_event: mouseleave; color: #4CC3D9"
-                   event-set__click="_event: click; _target: #helloText; display: block; _target: #button; display: none;">
-            </a-box>
-            <a-text value="Click Me!" position="0 0.5 0.1" color="#FFFFFF"></a-text>
-            <a-text id="helloText" value="hello" position="0 0.5 0.1" color="#FFFFFF"></a-text>
-        </a-marker>
-        <a-entity camera></a-entity>
+        <!-- Кнопка -->
+        <a-entity id="button"
+                 position="0 0 -1"
+                 geometry="primitive: plane; width: 1; height: 0.5"
+                 material="color: #4CAF50"
+                 raycaster="objects: [camera];"
+                 cursor-raycaster>
+            <!-- Текст на кнопке -->
+            <a-text id="buttonText"
+                    value="click me"
+                    position="0 0 0.1"
+                    rotation="0 0 0"
+                    align="center"
+                    color="white"
+                    width="1.5">
+            </a-text>
+        </a-entity>
     </a-scene>
 
+    <script>
+        // Получаем элементы
+        const button = document.querySelector('#button');
+        const buttonText = document.querySelector('#buttonText');
+
+        // Обработчик клика
+        button.addEventListener('click', function() {
+            if (buttonText.getAttribute('value') === 'click me') {
+                buttonText.setAttribute('value', 'hello');
+            } else {
+                buttonText.setAttribute('value', 'click me');
+            }
+        });
+    </script>
+    
     <!-- <script>
         let scene, camera, renderer, cube;
         const marker = document.getElementById('hiro-marker');
