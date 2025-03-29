@@ -28,19 +28,19 @@
     <a-scene embedded arjs>
         <!-- Кнопка -->
         <a-entity id="button"
-                 position="0 0 -1"
-                 geometry="primitive: plane; width: 1; height: 0.5"
-                 material="color: #4CAF50"
-                 raycaster="objects: [camera];"
-                 cursor-raycaster>
+            position="0 0 -1"
+            geometry="primitive: plane; width: 1; height: 0.5"
+            material="color: #4CAF50"
+            raycaster="objects: camera;"
+            cursor-raycaster>
             <!-- Текст на кнопке -->
             <a-text id="buttonText"
-                    value="click me"
-                    position="0 0 0.1"
-                    rotation="0 0 0"
-                    align="center"
-                    color="white"
-                    width="1.5">
+                value="click me"
+                position="0 0.1 0.1"
+                rotation="0 0 0"
+                align="center"
+                color="white"
+                width="1.5">
             </a-text>
         </a-entity>
     </a-scene>
@@ -59,7 +59,7 @@
             }
         });
     </script>
-    
+
     <!-- <script>
         let scene, camera, renderer, cube;
         const marker = document.getElementById('hiro-marker');
