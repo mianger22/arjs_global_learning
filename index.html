@@ -27,10 +27,11 @@
         <a-marker preset="hiro">
             <!-- Визитка -->
             <a-plane position="0 0 0" width="1.5" height="0.8" color="#D3D3D3" rotation="-90 0 0"></a-plane>
-            <a-text value="ustinov dmitry sergeevich" position="0 0 0.01" color="#000000" align="center" width="1.4"></a-text>
+            <!-- Текст на визитке -->
+            <a-entity position="0 0.01 0" text="value: ustonov dmitry sergeevich; color: #000000; align: center; width: 1.4;"></a-entity>
             <!-- Кнопка -->
             <a-plane position="0 -0.4 0" width="0.7" height="0.2" color="#4CAF50" rotation="-90 0 0" class="button"></a-plane>
-            <a-text value="click me" position="0 -0.4 0.01" color="#FFFFFF" align="center" width="0.6"></a-text>
+            <a-entity position="0 -0.4 0.01" text="value: click me; color: #FFFFFF; align: center; width: 0.6;"></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
